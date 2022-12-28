@@ -1,4 +1,5 @@
 import bpy
+import bpy_types
 import re
 
 
@@ -12,7 +13,7 @@ def RemoveTags(name: str, tags: list) -> str:
 def RemoveDoubleSpaces(name: str) -> str:
     result = name
     while "  " in result:
-        name = name.replace("  ", " ")
+        result = result.replace("  ", " ")
     return result
 
 
@@ -33,9 +34,9 @@ def Trim(name: str) -> str:
 
 
 def Capitalize(name: str) -> str:
-    temp = name.split(" ")
-    for s in temp:
-        s[0] = s[0].upper()
+    temp = []
+    for s in name.split(" "):
+        temp.append(s.replace(s[0], s[0].upper()))
     return " ".join(temp)
 
 
@@ -58,6 +59,7 @@ def ChangeNames():
             obj.name = RemoveDotWithAfter(obj.name)
             obj.name = Trim(obj.name)
             obj.name = Capitalize(obj.name)
+            obj.data.name = obj.name
         if (len(active.children) == 0):
             tags.pop()
 
