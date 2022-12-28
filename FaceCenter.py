@@ -11,5 +11,4 @@ def GetFaceCenter(obj: bpy.types.Object, faceIndex: int) -> mathutils.Vector:
         sum += v
     return sum / len(vertices)
 
-
 print(GetFaceCenter(bpy.context.active_object, 0))
